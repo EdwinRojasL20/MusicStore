@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBCARRITOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="IdCarrito" />
+          </Key>
+          <Property Name="IdCarrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="IdProducto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Clave" Type="varchar" MaxLength="150" />
+          <Property Name="Reestablecer" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DEPARTAMENTO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdDepartamento" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_VENTA">
+          <Key>
+            <PropertyRef Name="IdDetalleVenta" />
+          </Key>
+          <Property Name="IdDetalleVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVenta" Type="int" />
+          <Property Name="IdProducto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBCARRITO.dbo.DISTRITO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="DISTRITO">
+          <Key>
+            <PropertyRef Name="IdDristrito" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdMunicipio" />
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDristrito" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="IdMunicipio" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="IdDepartamento" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBCARRITO.dbo.LOCALIDAD' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="LOCALIDAD">
+          <Key>
+            <PropertyRef Name="IdLocalidad" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdLocalidad" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="IdDepartamento" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="IdMarca" Type="int" />
+          <Property Name="IdCategoria" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="RutaImagen" Type="varchar" MaxLength="100" />
+          <Property Name="NombreImagen" Type="varchar" MaxLength="100" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Clave" Type="varchar" MaxLength="150" />
+          <Property Name="Reestablecer" Type="bit" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="TotalProducto" Type="int" />
+          <Property Name="MontoTotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Contacto" Type="varchar" MaxLength="50" />
+          <Property Name="IdDistrito" Type="varchar" MaxLength="10" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="varchar" MaxLength="500" />
+          <Property Name="IdTransaccion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaVenta" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__CARRITO__IdClien__49C3F6B7">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CARRITO__IdProdu__4AB81AF0">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_V__IdPro__52593CB8">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_V__IdVen__5165187F">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="0..1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__IdCate__403A8C7D">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__IdMarc__3F466844">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA__IdCliente__4D94879B">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBCARRITOModelStoreContainer">
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DEPARTAMENTO].[IdDepartamento] AS [IdDepartamento], 
+[DEPARTAMENTO].[Descripcion] AS [Descripcion]
+FROM [dbo].[DEPARTAMENTO] AS [DEPARTAMENTO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DISTRITO" EntityType="Self.DISTRITO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DISTRITO].[IdDristrito] AS [IdDristrito], 
+[DISTRITO].[Descripcion] AS [Descripcion], 
+[DISTRITO].[IdMunicipio] AS [IdMunicipio], 
+[DISTRITO].[IdDepartamento] AS [IdDepartamento]
+FROM [dbo].[DISTRITO] AS [DISTRITO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LOCALIDAD" EntityType="Self.LOCALIDAD" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[LOCALIDAD].[IdLocalidad] AS [IdLocalidad], 
+[LOCALIDAD].[Descripcion] AS [Descripcion], 
+[LOCALIDAD].[IdDepartamento] AS [IdDepartamento]
+FROM [dbo].[LOCALIDAD] AS [LOCALIDAD]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__CARRITO__IdClien__49C3F6B7" Association="Self.FK__CARRITO__IdClien__49C3F6B7">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CARRITO__IdProdu__4AB81AF0" Association="Self.FK__CARRITO__IdProdu__4AB81AF0">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_V__IdPro__52593CB8" Association="Self.FK__DETALLE_V__IdPro__52593CB8">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_V__IdVen__5165187F" Association="Self.FK__DETALLE_V__IdVen__5165187F">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__IdCate__403A8C7D" Association="Self.FK__PRODUCTO__IdCate__403A8C7D">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__IdMarc__3F466844" Association="Self.FK__PRODUCTO__IdMarc__3F466844">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA__IdCliente__4D94879B" Association="Self.FK__VENTA__IdCliente__4D94879B">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBCARRITOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="IdCarrito" />
+          </Key>
+          <Property Name="IdCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdProducto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CARRITO__IdClien__49C3F6B7" FromRole="CARRITO" ToRole="CLIENTE" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__CARRITO__IdProdu__4AB81AF0" FromRole="CARRITO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__IdCate__403A8C7D" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Reestablecer" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CARRITO" Relationship="Self.FK__CARRITO__IdClien__49C3F6B7" FromRole="CLIENTE" ToRole="CARRITO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__IdCliente__4D94879B" FromRole="CLIENTE" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="DETALLE_VENTA">
+          <Key>
+            <PropertyRef Name="IdDetalleVenta" />
+          </Key>
+          <Property Name="IdDetalleVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVenta" Type="Int32" />
+          <Property Name="IdProducto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLE_V__IdPro__52593CB8" FromRole="DETALLE_VENTA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__DETALLE_V__IdVen__5165187F" FromRole="DETALLE_VENTA" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__IdMarc__3F466844" FromRole="MARCA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdMarca" Type="Int32" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="RutaImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CARRITO" Relationship="Self.FK__CARRITO__IdProdu__4AB81AF0" FromRole="PRODUCTO" ToRole="CARRITO" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__IdCate__403A8C7D" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK__DETALLE_V__IdPro__52593CB8" FromRole="PRODUCTO" ToRole="DETALLE_VENTA" />
+          <NavigationProperty Name="MARCA" Relationship="Self.FK__PRODUCTO__IdMarc__3F466844" FromRole="PRODUCTO" ToRole="MARCA" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Reestablecer" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="TotalProducto" Type="Int32" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdDistrito" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdTransaccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaVenta" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__VENTA__IdCliente__4D94879B" FromRole="VENTA" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK__DETALLE_V__IdVen__5165187F" FromRole="VENTA" ToRole="DETALLE_VENTA" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdDepartamento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISTRITO">
+          <Key>
+            <PropertyRef Name="IdDristrito" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdMunicipio" />
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDristrito" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdMunicipio" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdDepartamento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOCALIDAD">
+          <Key>
+            <PropertyRef Name="IdLocalidad" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdLocalidad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdDepartamento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CARRITO__IdClien__49C3F6B7">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CARRITO__IdProdu__4AB81AF0">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__IdCate__403A8C7D">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA__IdCliente__4D94879B">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_V__IdPro__52593CB8">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_V__IdVen__5165187F">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="0..1" />
+          <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="DETALLE_VENTA">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__IdMarc__3F466844">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CATEGORIAmodel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" />
+          <EntitySet Name="DISTRITO" EntityType="Self.DISTRITO" />
+          <EntitySet Name="LOCALIDAD" EntityType="Self.LOCALIDAD" />
+          <AssociationSet Name="FK__CARRITO__IdClien__49C3F6B7" Association="Self.FK__CARRITO__IdClien__49C3F6B7">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CARRITO__IdProdu__4AB81AF0" Association="Self.FK__CARRITO__IdProdu__4AB81AF0">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__IdCate__403A8C7D" Association="Self.FK__PRODUCTO__IdCate__403A8C7D">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA__IdCliente__4D94879B" Association="Self.FK__VENTA__IdCliente__4D94879B">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_V__IdPro__52593CB8" Association="Self.FK__DETALLE_V__IdPro__52593CB8">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_V__IdVen__5165187F" Association="Self.FK__DETALLE_V__IdVen__5165187F">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__IdMarc__3F466844" Association="Self.FK__PRODUCTO__IdMarc__3F466844">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBCARRITOModelStoreContainer" CdmEntityContainer="CATEGORIAmodel">
+          <EntitySetMapping Name="CARRITO">
+            <EntityTypeMapping TypeName="DBCARRITOModel.CARRITO">
+              <MappingFragment StoreEntitySet="CARRITO">
+                <ScalarProperty Name="IdCarrito" ColumnName="IdCarrito" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="DBCARRITOModel.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="DBCARRITOModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Reestablecer" ColumnName="Reestablecer" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_VENTA">
+            <EntityTypeMapping TypeName="DBCARRITOModel.DETALLE_VENTA">
+              <MappingFragment StoreEntitySet="DETALLE_VENTA">
+                <ScalarProperty Name="IdDetalleVenta" ColumnName="IdDetalleVenta" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCA">
+            <EntityTypeMapping TypeName="DBCARRITOModel.MARCA">
+              <MappingFragment StoreEntitySet="MARCA">
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="DBCARRITOModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBCARRITOModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="DBCARRITOModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Reestablecer" ColumnName="Reestablecer" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA">
+            <EntityTypeMapping TypeName="DBCARRITOModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="TotalProducto" ColumnName="TotalProducto" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="IdDistrito" ColumnName="IdDistrito" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTAMENTO">
+            <EntityTypeMapping TypeName="DBCARRITOModel.DEPARTAMENTO">
+              <MappingFragment StoreEntitySet="DEPARTAMENTO">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISTRITO">
+            <EntityTypeMapping TypeName="DBCARRITOModel.DISTRITO">
+              <MappingFragment StoreEntitySet="DISTRITO">
+                <ScalarProperty Name="IdDristrito" ColumnName="IdDristrito" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCALIDAD">
+            <EntityTypeMapping TypeName="DBCARRITOModel.LOCALIDAD">
+              <MappingFragment StoreEntitySet="LOCALIDAD">
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

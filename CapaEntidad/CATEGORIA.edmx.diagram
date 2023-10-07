@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a1e192c905cb4703a8d125db4f99af34" Name="Diagram1">
+        <EntityTypeShape EntityType="DBCARRITOModel.CARRITO" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.CLIENTE" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.DETALLE_VENTA" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.MARCA" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.PRODUCTO" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.USUARIO" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.VENTA" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.DEPARTAMENTO" Width="1.5" PointX="7.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.DISTRITO" Width="1.5" PointX="7.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCARRITOModel.LOCALIDAD" Width="1.5" PointX="9.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="DBCARRITOModel.FK__CARRITO__IdClien__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCARRITOModel.FK__CARRITO__IdProdu__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCARRITOModel.FK__PRODUCTO__IdCate__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCARRITOModel.FK__VENTA__IdCliente__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdPro__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCARRITOModel.FK__DETALLE_V__IdVen__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCARRITOModel.FK__PRODUCTO__IdMarc__3F466844" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
